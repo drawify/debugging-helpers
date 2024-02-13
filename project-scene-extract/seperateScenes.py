@@ -2,10 +2,17 @@ import os
 import json
 import requests
 import argparse
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def split_scenes_into_files(project_id, drawify_id):
+    # Retrieve the base URL from environment variables
+    base_url = os.getenv('BASE_URL')
+    
     # Construct the URL to fetch the JSON file
-    url = f"https://project-drawify-v2.s3.eu-west-3.amazonaws.com/projects-v3/{drawify_id}/{project_id}/{project_id}.json"
+    url = f"{base_url}/{drawify_id}/{project_id}/{project_id}.json"
     
     # Create a directory to store the output files, if it does not exist
     output_dir = f"./{project_id}_scenes"
